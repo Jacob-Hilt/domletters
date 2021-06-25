@@ -1,0 +1,36 @@
+#!/usr/bin/python3
+#Jacob Hilt
+
+if __name__ == "__main__":
+   
+    import sys
+    domSum = 0
+    remWords = []
+    sentence = ""
+    for line in sys.stdin: #Thanks to Michael Bottini for helping me understand this
+        sentence = sentence + line
+    text = sentence.upper().split() # https://www.w3schools.com/python/ref_string_split.asp
+    for word in text: # https://stackoverflow.com/questions/29771168/how-to-remove-words-from-a-list-in-python/29771407
+        if (not(word.isalpha())):
+            remWords.append(word)
+    for word in list(text):
+        if word in remWords:
+            text.remove(word)
+    print('\n')
+    for word in text:
+        domCount = 0
+        for letter in word:
+            if word.count(letter) > domCount: # https://stackoverflow.com/questions/33406943/how-count-the-number-of-times-a-letter-appears-in-word-using-python
+                domLetter = letter
+                domCount = word.count(letter)
+        print('word: ', word, '    dominant letter: ', domLetter, '    count: ', domCount)
+        domSum += domCount
+    print('\n')
+    print('Total: :', domSum)
+
+# Former Code:
+    #inFile = sys.argv[1] # https://stackoverflow.com/questions/20157824/how-to-take-input-file-from-terminal-for-python-script
+    #with open(inFile, 'r') as i:
+    #    sentence = i.read().replace('\n', ' ') # https://stackoverflow.com/questions/8369219/how-to-read-a-text-file-into-a-string-variable-and-strip-newlines
+    # sentence = sys.argv[1]
+    # sentence = input('Input the string: ') # Currently, using < only returns first line of file
